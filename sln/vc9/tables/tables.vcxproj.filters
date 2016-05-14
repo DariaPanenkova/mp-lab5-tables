@@ -18,12 +18,15 @@
     <ClCompile Include="sort_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NodeTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sort_table.h">
+    <ClInclude Include="..\..\..\include\sort_table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="table.h">
+    <ClInclude Include="..\..\..\include\table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
