@@ -107,6 +107,7 @@
     <ClCompile Include="..\..\..\test\test_polinom.cpp" />
     <ClCompile Include="test_tablehash.cpp" />
     <ClCompile Include="test_tablesort.cpp" />
+    <ClCompile Include="test_tree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@
 SortTable::SortTable()
 {
 	currpos = 0;
-	tabsize = 2;
+	tabsize = 5;
 	data = new NodeTable[tabsize];
 }
 

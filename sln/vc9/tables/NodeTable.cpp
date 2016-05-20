@@ -9,7 +9,7 @@ NodeTable :: NodeTable()
 NodeTable :: NodeTable(const NodeTable &n)
 {
 	key = n.GetKey();
-	pol = new Polinom(*n.GetPolinom());
+	pol = n.GetPolinom()  /*new Polinom(*n.GetPolinom())*/;
 }
 
 NodeTable :: NodeTable( string k, Polinom *p)

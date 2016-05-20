@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\tree.cpp" />
     <ClCompile Include="hash_table.cpp" />
     <ClCompile Include="NodeTable.cpp" />
     <ClCompile Include="sort_table.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="..\..\..\include\hash_table.h" />
     <ClInclude Include="..\..\..\include\sort_table.h" />
     <ClInclude Include="..\..\..\include\table.h" />
+    <ClInclude Include="..\..\..\include\tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

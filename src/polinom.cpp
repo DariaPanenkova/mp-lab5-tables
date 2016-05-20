@@ -230,11 +230,13 @@ bool Polinom:: operator == (const Polinom& p) const
 	Node<Monom>*  currp = p.polinom->GetHead();
 	while( currl != NULL)
 	{
-		if ( currl != currp)
+		if ( currl->GetData() == currp->GetData())
+		{
+			currl = currl->GetNext();
+			currp = currp->GetNext();
+		}
+		else
 			return false;
-
-		currl = currl->GetNext();
-		currp = currp->GetNext();
 	}
 
 	if(currp != NULL)
