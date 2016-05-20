@@ -11,7 +11,7 @@ private:
 
 public:
 	NodeTable();
-	NodeTable(NodeTable &n);
+	NodeTable(const NodeTable &n);
 	NodeTable(string k, Polinom *p);
 
 

@@ -27,6 +27,7 @@ public:
 	void DeleteMonom(Node<Monom> *m);
 	Monom& operator[](int pos);
 	Polinom operator = (const Polinom& p);
+	bool operator == (const Polinom& p) const;
     friend Polinom operator+ (const Polinom& l,const Polinom& p);
 	friend Polinom operator*( const Polinom& l,const Monom& r);
 	friend Polinom operator*(const Polinom& l,const Polinom& r);

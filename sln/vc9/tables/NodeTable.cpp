@@ -6,7 +6,7 @@ NodeTable :: NodeTable()
 	pol = new Polinom;
 }
 
-NodeTable :: NodeTable( NodeTable &n)
+NodeTable :: NodeTable(const NodeTable &n)
 {
 	key = n.GetKey();
 	pol = new Polinom(*n.GetPolinom());

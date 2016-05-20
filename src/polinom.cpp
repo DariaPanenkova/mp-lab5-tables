@@ -223,3 +223,23 @@ while (curr != NULL)
 }
 //std::cout << endl;
 }
+
+bool Polinom:: operator == (const Polinom& p) const
+{
+	Node<Monom>* currl = polinom->GetHead();
+	Node<Monom>*  currp = p.polinom->GetHead();
+	while( currl != NULL)
+	{
+		if ( currl != currp)
+			return false;
+
+		currl = currl->GetNext();
+		currp = currp->GetNext();
+	}
+
+	if(currp != NULL)
+		return false;
+	else 
+		return true;
+
+}

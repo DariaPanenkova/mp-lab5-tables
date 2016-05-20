@@ -105,6 +105,7 @@
     <ClCompile Include="..\..\..\test\test_list.cpp" />
     <ClCompile Include="..\..\..\test\test_main.cpp" />
     <ClCompile Include="..\..\..\test\test_polinom.cpp" />
+    <ClCompile Include="test_tablehash.cpp" />
     <ClCompile Include="test_tablesort.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
