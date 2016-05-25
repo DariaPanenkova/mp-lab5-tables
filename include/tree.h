@@ -41,8 +41,8 @@ public:
 	Tree_El* SearchMax(Tree_El* r);
 	Tree_El* SearchNext(Tree_El* r);
 	Tree_El* SearchPrev(Tree_El* r);
-	void Insert(Tree_El &n);
+	void Insert(Tree_El* n);
 	void Delete (string k);
-	void Delete (Tree_El * tmp);
+	void Delete (Tree_El*& tmp);
 
 };

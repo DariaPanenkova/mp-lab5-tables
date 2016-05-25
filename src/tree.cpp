@@ -86,28 +86,28 @@ Tree_El* Tree:: Find(Tree_El* r, string k )
 	if(tmp != NULL)
 	{
 		while((tmp->GetData())->GetKey() != k)
+		{
+			if((tmp->GetData())->GetKey() > k)
 			{
-				if((tmp->GetData())->GetKey() > k)
+				if(tmp->GetLeft() != NULL)
+					tmp = tmp->GetLeft();
+				else
 				{
-					if(tmp->GetLeft() != NULL)
-						tmp = tmp->GetLeft();
-					else
-					{
-						tmp = NULL;
-						break;
-					}
-				}
-				else 
-				{
-					if(tmp->GetRight() != NULL)
-						tmp = tmp->GetRight();
-					else
-					{
-						tmp = NULL;
-						break;
-					}
+					tmp = NULL;
+					break;
 				}
 			}
+			else 
+			{
+				if(tmp->GetRight() != NULL)
+					tmp = tmp->GetRight();
+				else
+				{
+					tmp = NULL;
+					break;
+				}
+			}
+		}
 	}
 	return tmp;
 }
@@ -147,40 +147,41 @@ Tree_El* Tree:: SearchPrev(Tree_El* root)
 	return tmp;
 }
 
-void Tree:: Insert (Tree_El &n)                     
+void Tree:: Insert (Tree_El* n)                     
 {
 	if(root == NULL)
 	{
-		root=new Tree_El(n);
+		root = n;
+		root->SetParent(root);
 	}
 	else 
-		if( Find(root,(n.GetData())->GetKey()) != NULL)
+		if( Find(root,(n->GetData())->GetKey()) != NULL)
 		{
 			throw "The keys are equal. Paste imposible";
 		}
 		else
 		{
-		Tree_El* prev=root;
-		Tree_El* tmp=root;
-		while(tmp!=NULL)
-		{
-			prev=tmp;
-			if(tmp->GetData()->GetKey() < n.GetData()->GetKey())
-				tmp=tmp->GetRight();
+			Tree_El* prev=root;
+			Tree_El* tmp=root;
+			while(tmp!=NULL)
+			{
+				prev=tmp;
+				if(tmp->GetData()->GetKey() < n->GetData()->GetKey())
+					tmp=tmp->GetRight();
+				else
+					tmp=tmp->GetLeft();
+			}
+			if(prev->GetData()->GetKey() > n->GetData()->GetKey())
+			{
+				prev->SetLeft(n);
+				(prev->GetLeft())->SetParent(prev);
+			}
 			else
-				tmp=tmp->GetLeft();
+			{
+				prev->SetRight(n);
+				(prev->GetRight())->SetParent(prev);
+			}
 		}
-		if(prev->GetData()->GetKey() > n.GetData()->GetKey())
-		{
-			prev->SetLeft(new Tree_El(n));
-			(prev->GetLeft())->SetParent(prev);
-		}
-		else
-		{
-			prev->SetRight(new Tree_El(n));
-			(prev->GetRight())->SetParent(prev);
-		}
-	}
 }
 
 void Tree::Delete (string key)                 
@@ -204,45 +205,63 @@ void Tree::Delete (string key)
 	}
 }
 
-void Tree::Delete (Tree_El* tmp)
+void Tree::Delete (Tree_El*& tmp)
 {
 	if(tmp->GetLeft() && tmp->GetRight())
+	{
+		Tree_El* loc_max = SearchMin( tmp->GetRight());
+		tmp->SetData(loc_max->GetData());
+		Delete(loc_max);
+	}
+	else
+	{
+		if (tmp->GetLeft())
+		{
+			if (tmp == root)
 			{
-				Tree_El* loc_max = SearchMax( tmp->GetLeft());
-				tmp->SetData(loc_max->GetData());
-				Delete(loc_max);
+				root = tmp->GetLeft();
+				root->SetParent(root);
+			}
+			
+			
+			if(tmp == (tmp->GetParent())->GetLeft())
+			{
+				(tmp->GetParent())->SetLeft(tmp->GetLeft());
 			}
 			else 
-				if (tmp->GetLeft())
+			{
+				(tmp->GetParent())->SetRight(tmp->GetLeft());
+			}
+		}
+		else
+			if (tmp->GetRight())
+			{
+				if (tmp == root)
 				{
-					if(tmp == (tmp->GetParent())->GetLeft())
-					{
-						(tmp->GetParent())->SetLeft(tmp->GetLeft());
-					}
-					else 
-						(tmp->GetParent())->SetRight(tmp->GetLeft());
+					root = tmp->GetRight();
+					root->SetParent(root);
 				}
-				else
-					if (tmp->GetRight())
-					{
-						if(tmp == (tmp->GetParent())->GetRight())
-					{
-						(tmp->GetParent())->SetRight(tmp->GetRight());
-					}
-					else 
-						(tmp->GetParent())->SetLeft(tmp->GetRight());
-					}
-					else
-					{
-						if (tmp == (tmp->GetParent())->GetLeft())
-						{
-							tmp->GetParent()->SetLeft(NULL);
-						}
-						else 
-							tmp->GetParent()->SetRight(NULL);
 
-					
-					}
-					delete tmp;
-
+				if(tmp == (tmp->GetParent())->GetRight())
+				{
+					(tmp->GetParent())->SetRight(tmp->GetRight());
+				}
+				else 
+				{
+					(tmp->GetParent())->SetLeft(tmp->GetRight());
+				}
+			}
+			else
+			{
+				if (tmp == (tmp->GetParent())->GetLeft())
+				{
+					tmp->GetParent()->SetLeft(NULL);
+				}
+				else 
+				{
+					tmp->GetParent()->SetRight(NULL);
+				}
+			}
+			delete tmp;
+	}
 }
